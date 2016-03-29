@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# custom-hook
+
+pattern='/(JIRA|STASH)\-[0-9]+/'
+check=$(php -r "echo (preg_match('${pattern}', '${1}') ? 'match' : 'nomatch');")
+
+if [ "$check" = "nomatch" ]; then
+    echo "$(tput setaf 7)$(tput setab 1)Error: invalid commit message, commit message should match ${pattern}$(tput sgr 0)"
+
+    exit 1
+fi

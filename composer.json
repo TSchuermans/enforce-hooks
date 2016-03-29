@@ -1,0 +1,21 @@
+{
+    "name": "tschuermans/enforce-hooks",
+    "type": "composer-plugin",
+    "description": "A composer plugin to enforce git hooks.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TSchuermans\\Composer\\" : "src/"
+        }
+    },
+    "require": {
+        "composer-plugin-api": "^1.0",
+        "league/flysystem": "^1.0"
+    },
+    "extra": {
+        "class": "TSchuermans\\Composer\\Plugin\\EnforceHooks"
+    },
+    "require-dev": {
+        "composer/composer": "dev-master"
+    }
+}
