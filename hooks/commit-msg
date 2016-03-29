@@ -2,11 +2,14 @@
 
 # custom-hook
 
-pattern='/(JIRA|STASH)\-[0-9]+/'
-check=$(php -r "echo (preg_match('${pattern}', '${1}') ? 'match' : 'nomatch');")
+pattern="(JIRA|PROJECTKEY)\-[0-9]"
+check=$(grep -E "${pattern}" "${1}")
 
-if [ "$check" = "nomatch" ]; then
-    echo "$(tput setaf 7)$(tput setab 1)Error: invalid commit message, commit message should match ${pattern}$(tput sgr 0)"
-
-    exit 1
+if [[ "${check}" != "" ]]; then
+  # Everything is OK
+	exit 0
+else
+  # No match, fail hard
+	echo "Invalid commit message, commit message should contain project key and issue key separated by a dash. e.g. JIRA-123"
+	exit 1
 fi
